@@ -14,11 +14,25 @@ import sqlite3
 # res = cur.execute("SELECT NOME FROM Agendamento WHERE NOME='Kaique'")
 # print(res.fetchall())
 
+# import sqlite3
+
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 
 def buscaAgendamento():
     con = sqlite3.connect("🍌.db")
+    # con.row_factory = dict_factory
+    
     cursor = con.cursor()
-    cursor.execute("""INSERT INTO Agendamento(ID,NOME,HORARIO,AGENDADO,RESERVA) VALUES(1,"Kaique",DATE('now'), 1, DATE('now'))""")
+    cursor.execute("""INSERT INTO Agendamento(ID,NOME,HORARIO,AGENDADO,RESERVA) VALUES(1,"Kaique",TIME('now'), 1, DATE('now'))""")
     res = cursor.execute("SELECT * FROM Agendamento")
+    # for item in res:
+    #     item['ID']
+    # print(item)
     return res.fetchall()
 

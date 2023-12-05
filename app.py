@@ -10,6 +10,7 @@ app = Flask(__name__)
 @app.get('/batata')
 def login_get():
     res = pySql.buscaAgendamento()
+    print(res)
     return res
 
 if __name__ == '__main__':
